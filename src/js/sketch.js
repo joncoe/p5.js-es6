@@ -6,30 +6,38 @@ const sketch = (p) => {
   let logo;
   let logoWidth = 250;
   let logoHeight = 114;
+  let canvasWidth = 1500;
+  let canvasHeight = 1500;
 
   p.preload = () => {
     logo = p.loadImage('assets/p5js.svg');
   };
 
   p.setup = () => {
-    canvas = p.createCanvas(p.windowWidth, p.windowHeight);
+    canvas = p.createCanvas(canvasWidth, canvasHeight);
+    p.background(111);
     p.image(
       logo,
-      p.windowWidth / 2 - logoWidth / 2,
-      p.windowHeight / 2 - logoHeight / 2
+      canvasWidth / 2 - logoWidth / 2,
+      canvasHeight / 2 - logoHeight / 2
     );
   };
 
-  p.draw = () => {};
+  p.draw = () => {
+    
+    
 
-  p.windowResized = () => {
-    p.resizeCanvas(p.windowWidth, p.windowHeight);
-    p.image(
-      logo,
-      p.windowWidth / 2 - logoWidth / 2,
-      p.windowHeight / 2 - logoHeight / 2
-    );
   };
+
+
+  // p.windowResized = () => {
+  //   p.resizeCanvas(canvasWidth, canvasHeight);
+  //   p.image(
+  //     logo,
+  //     canvasWidth / 2 - logoWidth / 2,
+  //     canvasHeight / 2 - logoHeight / 2
+  //   );
+  // };
 
   p.keyPressed = () => {};
 };
