@@ -11,8 +11,6 @@ var base = {
     x : 323,
     y: 733
   },
-
-
   p3: {
     x : 488,
     y: 1174
@@ -113,15 +111,6 @@ const sketch = (p) => {
 
   };
 
-
-  // p.windowResized = () => {
-  //   p.resizeCanvas(canvasWidth, canvasHeight);
-  //   p.image(
-  //     logo,
-  //     canvasWidth / 2 - logoWidth / 2,
-  //     canvasHeight / 2 - logoHeight / 2
-  //   );
-  // };
 
   p.keyPressed = () => {};
 };
