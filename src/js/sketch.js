@@ -67,7 +67,7 @@ const sketch = (p) => {
 
   p.setup = () => {
     canvas = p.createCanvas(canvasWidth, canvasHeight);
-    p.background(111);
+    p.background(200);
     // p.image(
     //   baseImage,
     //   0,
@@ -77,27 +77,9 @@ const sketch = (p) => {
 
   p.draw = () => {
     
-    // p.fill('#ffcc00')
-    // p.line(bf.p1.x, bf.p1.y, bf.p2.x, bf.p2.y);
-    // p.stroke('#00FFA2');
-    // p.line(bf.p2.x, bf.p2.y, bf.p3.x, bf.p3.y);
-    // p.stroke('#00FFA2');
-    // p.line(bf.p3.x, bf.p3.y, bf.p4.x, bf.p4.y);
-    // p.stroke('#00FFA2');
-    // p.line(bf.p4.x, bf.p4.y, bf.p5.x, bf.p5.y);
-    // p.stroke('#00FFA2');
-    // p.line(bf.p5.x, bf.p5.y, bf.p6.x, bf.p6.y);
-    // p.stroke('#00FFA2');
-    // p.line(bf.p6.x, bf.p6.y, bf.p7.x, bf.p7.y);
-    // p.stroke('#00FFA2');
-    // p.line(bf.p7.x, bf.p7.y, bf.p8.x, bf.p8.y);
-    // p.stroke('#00FFA2');
-    // p.line(bf.p8.x, bf.p8.y, bf.p1.x, bf.p1.y);
-    // p.stroke('#00FFA2');
-
     // Base Shape
     p.beginShape()
-    p.stroke(255)
+    p.noStroke()
     p.fill(255)
     p.vertex(base.p1.x, base.p1.y)
     p.vertex(base.p2.x, base.p2.y)
@@ -109,10 +91,10 @@ const sketch = (p) => {
     p.vertex(surface.p1.x, surface.p1.y)
     p.endShape(p.CLOSE)
     
-    
+    // Surface Shape
     p.beginShape()
-    p.stroke('#ffcc00')
-    p.fill('#ffcc00')
+    p.noStroke()
+    p.fill('#ED1C24')
     p.vertex(surface.p1.x, surface.p1.y)
     p.vertex(surface.p2.x, surface.p2.y)
     p.vertex(surface.p3.x, surface.p3.y)
@@ -122,6 +104,11 @@ const sketch = (p) => {
     p.vertex(surface.p1.x, surface.p1.y)
     p.endShape(p.CLOSE)
 
+    // Connector Shape
+    p.stroke(0)
+    p.strokeWeight(1)
+    p.line(base.p2.x, base.p2.y, surface.p2.x, surface.p2.y)
+    p.line(base.p3.x, base.p3.y, surface.p3.x, surface.p3.y)
     
 
   };
