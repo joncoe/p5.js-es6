@@ -1,6 +1,14 @@
 import p5 from 'p5';
 import '../css/style.scss';
 
+
+var minShapeDepth = 35;
+var maxShapeDepth = 106;
+
+var randomDepth = minShapeDepth + (Math.random() * maxShapeDepth);
+
+// 50 * 
+
 var base = {
   p1: {
     x: 374,
@@ -20,31 +28,39 @@ var base = {
     x : 1073,
     y: 988
   },
+  p5: {
+    x: 1113,
+    y: 652
+  },
+  p6: {
+    x: 815,
+    y: 368
+  }
 };
 var surface = {
   p1: {
-    x: 409,
-    y: 406
+    x: base.p1.x + randomDepth,
+    y: base.p1.y - randomDepth
   },
   p2: {
-    x : 358,
-    y: 700
+    x: base.p2.x + randomDepth,
+    y: base.p2.y - randomDepth
   },
   p3: {
-    x : 524,
-    y: 1139
+    x: base.p3.x + randomDepth,
+    y: base.p3.y - randomDepth
   },
   p4: {
-    x : 1109,
-    y: 953
+    x: base.p4.x + randomDepth,
+    y: base.p4.y - randomDepth
   },
   p5: {
-    x : 1143,
-    y: 622
+    x: base.p5.x + randomDepth,
+    y: base.p5.y - randomDepth
   },
   p6: {
-    x : 845,
-    y: 338
+    x : base.p6.x + randomDepth,
+    y: base.p6.y - randomDepth
   }
 };
 
@@ -80,6 +96,7 @@ const sketch = (p) => {
   p.draw = () => {
     
     // Base Shape
+    p.background(200);
     p.beginShape()
     p.noStroke()
     p.fill(255)
@@ -124,7 +141,35 @@ const sketch = (p) => {
     red = Math.round(Math.random() * 255);
     green = Math.round(Math.random() * 255);
     blue = Math.round(Math.random() * 255);
+    randomDepth = minShapeDepth + (Math.random() * maxShapeDepth);
 
+
+    surface = {
+      p1: {
+        x: base.p1.x + randomDepth,
+        y: base.p1.y - randomDepth
+      },
+      p2: {
+        x: base.p2.x + randomDepth,
+        y: base.p2.y - randomDepth
+      },
+      p3: {
+        x: base.p3.x + randomDepth,
+        y: base.p3.y - randomDepth
+      },
+      p4: {
+        x: base.p4.x + randomDepth,
+        y: base.p4.y - randomDepth
+      },
+      p5: {
+        x: base.p5.x + randomDepth,
+        y: base.p5.y - randomDepth
+      },
+      p6: {
+        x : base.p6.x + randomDepth,
+        y: base.p6.y - randomDepth
+      }
+    };
   }
 };
 
