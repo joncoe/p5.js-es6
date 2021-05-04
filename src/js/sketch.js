@@ -37,32 +37,45 @@ var base = {
     y: 368
   }
 };
+
+let randomDepths = {
+  vertex1: minShapeDepth + (Math.random() * maxShapeDepth),
+  vertex2: minShapeDepth + (Math.random() * maxShapeDepth),
+  vertex3: minShapeDepth + (Math.random() * maxShapeDepth),
+  vertex4: minShapeDepth + (Math.random() * maxShapeDepth),
+  vertex5: minShapeDepth + (Math.random() * maxShapeDepth),
+  vertex6: minShapeDepth + (Math.random() * maxShapeDepth),
+}
+
+
 var surface = {
   p1: {
-    x: base.p1.x + randomDepth,
-    y: base.p1.y - randomDepth
+    x: base.p1.x + randomDepths.vertex1,
+    y: base.p1.y - randomDepths.vertex1
   },
   p2: {
-    x: base.p2.x + randomDepth,
-    y: base.p2.y - randomDepth
+    x: base.p2.x + randomDepths.vertex2,
+    y: base.p2.y - randomDepths.vertex2
   },
   p3: {
-    x: base.p3.x + randomDepth,
-    y: base.p3.y - randomDepth
+    x: base.p3.x + randomDepths.vertex3,
+    y: base.p3.y - randomDepths.vertex3
   },
   p4: {
-    x: base.p4.x + randomDepth,
-    y: base.p4.y - randomDepth
+    x: base.p4.x + randomDepths.vertex4,
+    y: base.p4.y - randomDepths.vertex4
   },
   p5: {
-    x: base.p5.x + randomDepth,
-    y: base.p5.y - randomDepth
+    x: base.p5.x + randomDepths.vertex5,
+    y: base.p5.y - randomDepths.vertex5
   },
   p6: {
-    x : base.p6.x + randomDepth,
-    y: base.p6.y - randomDepth
+    x : base.p6.x + randomDepths.vertex5,
+    y: base.p6.y - randomDepths.vertex6
   }
 };
+
+
 
 // set initial values
 let red = Math.round(Math.random() * 255);
@@ -141,33 +154,42 @@ const sketch = (p) => {
     red = Math.round(Math.random() * 255);
     green = Math.round(Math.random() * 255);
     blue = Math.round(Math.random() * 255);
-    randomDepth = minShapeDepth + (Math.random() * maxShapeDepth);
-
+    
+    
+    let randomDepths = {
+      vertex1: minShapeDepth + (Math.random() * maxShapeDepth),
+      vertex2: minShapeDepth + (Math.random() * maxShapeDepth),
+      vertex3: minShapeDepth + (Math.random() * maxShapeDepth),
+      vertex4: minShapeDepth + (Math.random() * maxShapeDepth),
+      vertex5: minShapeDepth + (Math.random() * maxShapeDepth),
+      vertex6: minShapeDepth + (Math.random() * maxShapeDepth),
+    }
+    
 
     surface = {
       p1: {
-        x: base.p1.x + randomDepth,
-        y: base.p1.y - randomDepth
+        x: base.p1.x + randomDepths.vertex1,
+        y: base.p1.y - randomDepths.vertex1
       },
       p2: {
-        x: base.p2.x + randomDepth,
-        y: base.p2.y - randomDepth
+        x: base.p2.x + randomDepths.vertex2,
+        y: base.p2.y - randomDepths.vertex2
       },
       p3: {
-        x: base.p3.x + randomDepth,
-        y: base.p3.y - randomDepth
+        x: base.p3.x + randomDepths.vertex3,
+        y: base.p3.y - randomDepths.vertex3
       },
       p4: {
-        x: base.p4.x + randomDepth,
-        y: base.p4.y - randomDepth
+        x: base.p4.x + randomDepths.vertex4,
+        y: base.p4.y - randomDepths.vertex4
       },
       p5: {
-        x: base.p5.x + randomDepth,
-        y: base.p5.y - randomDepth
+        x: base.p5.x + randomDepths.vertex5,
+        y: base.p5.y - randomDepths.vertex5
       },
       p6: {
-        x : base.p6.x + randomDepth,
-        y: base.p6.y - randomDepth
+        x : base.p6.x + randomDepths.vertex5,
+        y: base.p6.y - randomDepths.vertex6
       }
     };
   }
