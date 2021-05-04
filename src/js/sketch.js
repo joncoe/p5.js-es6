@@ -48,6 +48,10 @@ var surface = {
   }
 };
 
+// set initial values
+let red = Math.round(Math.random() * 255);
+let green = Math.round(Math.random() * 255);
+let blue = Math.round(Math.random() * 255);
 
 
 
@@ -92,7 +96,8 @@ const sketch = (p) => {
     // Surface Shape
     p.beginShape()
     p.noStroke()
-    p.fill('#ED1C24')
+    //p.fill('#ED1C24')
+    p.fill(red, green, blue)
     p.vertex(surface.p1.x, surface.p1.y)
     p.vertex(surface.p2.x, surface.p2.y)
     p.vertex(surface.p3.x, surface.p3.y)
@@ -113,6 +118,14 @@ const sketch = (p) => {
 
 
   p.keyPressed = () => {};
+
+  p.mouseClicked = () => {
+    // set new random values for the variables defined above:
+    red = Math.round(Math.random() * 255);
+    green = Math.round(Math.random() * 255);
+    blue = Math.round(Math.random() * 255);
+
+  }
 };
 
 new p5(sketch);
