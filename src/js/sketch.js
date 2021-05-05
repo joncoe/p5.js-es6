@@ -2,14 +2,25 @@ import p5 from 'p5';
 import '../css/style.scss';
 
 
-var minShapeDepth = 35;
-var maxShapeDepth = 106;
+let minShapeDepth = 35;
+let maxShapeDepth = 106;
 
-var randomDepth = minShapeDepth + (Math.random() * maxShapeDepth);
+
+let randomDepths, surface, red, green, blue;
+
+let tSurface, tRed, tGreen, tBlue;
+
+const animate = false;
+
+
+// set initial values
+red = Math.round(Math.random() * 255);
+green = Math.round(Math.random() * 255);
+blue = Math.round(Math.random() * 255);
 
 // 50 * 
 
-var base = {
+const base = {
   p1: {
     x: 374,
     y: 440
@@ -38,51 +49,53 @@ var base = {
   }
 };
 
-let randomDepths = {
-  vertex1: minShapeDepth + (Math.random() * maxShapeDepth),
-  vertex2: minShapeDepth + (Math.random() * maxShapeDepth),
-  vertex3: minShapeDepth + (Math.random() * maxShapeDepth),
-  vertex4: minShapeDepth + (Math.random() * maxShapeDepth),
-  vertex5: minShapeDepth + (Math.random() * maxShapeDepth),
-  vertex6: minShapeDepth + (Math.random() * maxShapeDepth),
+
+
+function makeShape() {
+
+  red = Math.round(Math.random() * 255);
+  green = Math.round(Math.random() * 255);
+  blue = Math.round(Math.random() * 255);
+
+  randomDepths = {
+    vertex1: minShapeDepth + (Math.random() * maxShapeDepth),
+    vertex2: minShapeDepth + (Math.random() * maxShapeDepth),
+    vertex3: minShapeDepth + (Math.random() * maxShapeDepth),
+    vertex4: minShapeDepth + (Math.random() * maxShapeDepth),
+    vertex5: minShapeDepth + (Math.random() * maxShapeDepth),
+    vertex6: minShapeDepth + (Math.random() * maxShapeDepth),
+  }
+
+
+  surface = {
+    p1: {
+      x: base.p1.x + randomDepths.vertex1,
+      y: base.p1.y - randomDepths.vertex1
+    },
+    p2: {
+      x: base.p2.x + randomDepths.vertex2,
+      y: base.p2.y - randomDepths.vertex2
+    },
+    p3: {
+      x: base.p3.x + randomDepths.vertex3,
+      y: base.p3.y - randomDepths.vertex3
+    },
+    p4: {
+      x: base.p4.x + randomDepths.vertex4,
+      y: base.p4.y - randomDepths.vertex4
+    },
+    p5: {
+      x: base.p5.x + randomDepths.vertex5,
+      y: base.p5.y - randomDepths.vertex5
+    },
+    p6: {
+      x : base.p6.x + randomDepths.vertex5,
+      y: base.p6.y - randomDepths.vertex6
+    }
+  };
 }
 
-
-var surface = {
-  p1: {
-    x: base.p1.x + randomDepths.vertex1,
-    y: base.p1.y - randomDepths.vertex1
-  },
-  p2: {
-    x: base.p2.x + randomDepths.vertex2,
-    y: base.p2.y - randomDepths.vertex2
-  },
-  p3: {
-    x: base.p3.x + randomDepths.vertex3,
-    y: base.p3.y - randomDepths.vertex3
-  },
-  p4: {
-    x: base.p4.x + randomDepths.vertex4,
-    y: base.p4.y - randomDepths.vertex4
-  },
-  p5: {
-    x: base.p5.x + randomDepths.vertex5,
-    y: base.p5.y - randomDepths.vertex5
-  },
-  p6: {
-    x : base.p6.x + randomDepths.vertex5,
-    y: base.p6.y - randomDepths.vertex6
-  }
-};
-
-
-
-// set initial values
-let red = Math.round(Math.random() * 255);
-let green = Math.round(Math.random() * 255);
-let blue = Math.round(Math.random() * 255);
-
-
+makeShape();
 
 
 
@@ -126,73 +139,58 @@ const sketch = (p) => {
     // Surface Shape
     p.beginShape()
     p.noStroke()
-    //p.fill('#ED1C24')
-    p.fill(red, green, blue)
-    p.vertex(surface.p1.x, surface.p1.y)
-    p.vertex(surface.p2.x, surface.p2.y)
-    p.vertex(surface.p3.x, surface.p3.y)
-    p.vertex(surface.p4.x, surface.p4.y)
-    p.vertex(surface.p5.x, surface.p5.y)
-    p.vertex(surface.p6.x, surface.p6.y)
-    p.vertex(surface.p1.x, surface.p1.y)
-    p.endShape(p.CLOSE)
 
-    // Connector Shape
-    p.stroke(0)
-    p.strokeWeight(1)
-    p.line(base.p2.x, base.p2.y, surface.p2.x, surface.p2.y)
-    p.line(base.p3.x, base.p3.y, surface.p3.x, surface.p3.y)
-    
+    if (animate == true) {
+
+      p.fill(tRed, tGreen, tBlue)
+      // p.vertex(tSurface.p1.x, tSurface.p1.y)
+      // p.vertex(tSurface.p2.x, tSurface.p2.y)
+      // p.vertex(tSurface.p3.x, tSurface.p3.y)
+      // p.vertex(tSurface.p4.x, tSurface.p4.y)
+      // p.vertex(tSurface.p5.x, tSurface.p5.y)
+      // p.vertex(tSurface.p6.x, tSurface.p6.y)
+      // p.vertex(tSurface.p1.x, tSurface.p1.y)
+      p.vertex(surface.p1.x, surface.p1.y)
+      p.vertex(surface.p2.x, surface.p2.y)
+      p.vertex(surface.p3.x, surface.p3.y)
+      p.vertex(surface.p4.x, surface.p4.y)
+      p.vertex(surface.p5.x, surface.p5.y)
+      p.vertex(surface.p6.x, surface.p6.y)
+      p.vertex(surface.p1.x, surface.p1.y)
+
+      p.endShape(p.CLOSE)
+
+      p.stroke(0)
+      p.strokeWeight(1)
+      // p.line(base.p2.x, base.p2.y, tSurface.p2.x, tSurface.p2.y)
+      // p.line(base.p3.x, base.p3.y, tSurface.p3.x, tSurface.p3.y)
+      p.line(base.p2.x, base.p2.y, surface.p2.x, surface.p2.y)
+      p.line(base.p3.x, base.p3.y, surface.p3.x, surface.p3.y)
+
+
+    } else {
+
+      p.fill(red, green, blue)
+      p.vertex(surface.p1.x, surface.p1.y)
+      p.vertex(surface.p2.x, surface.p2.y)
+      p.vertex(surface.p3.x, surface.p3.y)
+      p.vertex(surface.p4.x, surface.p4.y)
+      p.vertex(surface.p5.x, surface.p5.y)
+      p.vertex(surface.p6.x, surface.p6.y)
+      p.vertex(surface.p1.x, surface.p1.y)
+      p.endShape(p.CLOSE)
+
+      p.stroke(0)
+      p.strokeWeight(1)
+      p.line(base.p2.x, base.p2.y, surface.p2.x, surface.p2.y)
+      p.line(base.p3.x, base.p3.y, surface.p3.x, surface.p3.y)
+    }
 
   };
 
-
   p.keyPressed = () => {};
 
-  p.mouseClicked = () => {
-    // set new random values for the variables defined above:
-    red = Math.round(Math.random() * 255);
-    green = Math.round(Math.random() * 255);
-    blue = Math.round(Math.random() * 255);
-    
-    
-    let randomDepths = {
-      vertex1: minShapeDepth + (Math.random() * maxShapeDepth),
-      vertex2: minShapeDepth + (Math.random() * maxShapeDepth),
-      vertex3: minShapeDepth + (Math.random() * maxShapeDepth),
-      vertex4: minShapeDepth + (Math.random() * maxShapeDepth),
-      vertex5: minShapeDepth + (Math.random() * maxShapeDepth),
-      vertex6: minShapeDepth + (Math.random() * maxShapeDepth),
-    }
-    
-
-    surface = {
-      p1: {
-        x: base.p1.x + randomDepths.vertex1,
-        y: base.p1.y - randomDepths.vertex1
-      },
-      p2: {
-        x: base.p2.x + randomDepths.vertex2,
-        y: base.p2.y - randomDepths.vertex2
-      },
-      p3: {
-        x: base.p3.x + randomDepths.vertex3,
-        y: base.p3.y - randomDepths.vertex3
-      },
-      p4: {
-        x: base.p4.x + randomDepths.vertex4,
-        y: base.p4.y - randomDepths.vertex4
-      },
-      p5: {
-        x: base.p5.x + randomDepths.vertex5,
-        y: base.p5.y - randomDepths.vertex5
-      },
-      p6: {
-        x : base.p6.x + randomDepths.vertex5,
-        y: base.p6.y - randomDepths.vertex6
-      }
-    };
-  }
+  p.mouseClicked = makeShape;
 };
 
 new p5(sketch);
