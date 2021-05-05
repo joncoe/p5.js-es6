@@ -4,13 +4,12 @@ import '../css/style.scss';
 
 let minShapeDepth = 35;
 let maxShapeDepth = 106;
+let friction = 0.1;
 
+let randomDepths, red, green, blue;
+let cSurface, cRed, cGreen, cBlue;
 
-let randomDepths, surface, red, green, blue;
-
-let tSurface, tRed, tGreen, tBlue;
-
-const animate = false;
+const animate = true;
 
 
 // set initial values
@@ -25,7 +24,6 @@ const base = {
     x: 374,
     y: 440
   },
-
   p2: {
     x : 323,
     y: 733
@@ -49,13 +47,24 @@ const base = {
   }
 };
 
+let surface = JSON.parse(JSON.stringify(base));
+
 
 
 function makeShape() {
+  
+  cSurface = JSON.parse(JSON.stringify(surface));
+  cRed = red
+  cGreen = green
+  cBlue = blue
+
 
   red = Math.round(Math.random() * 255);
   green = Math.round(Math.random() * 255);
   blue = Math.round(Math.random() * 255);
+
+
+
 
   randomDepths = {
     vertex1: minShapeDepth + (Math.random() * maxShapeDepth),
@@ -123,53 +132,97 @@ const sketch = (p) => {
     
     // Base Shape
     p.background(200);
-    p.beginShape()
-    p.noStroke()
-    p.fill(255)
-    p.vertex(base.p1.x, base.p1.y)
-    p.vertex(base.p2.x, base.p2.y)
-    p.vertex(base.p3.x, base.p3.y)
-    p.vertex(base.p4.x, base.p4.y)
-    p.vertex(surface.p4.x, surface.p4.y)
-    p.vertex(surface.p3.x, surface.p3.y)
-    p.vertex(surface.p2.x, surface.p2.y)
-    p.vertex(surface.p1.x, surface.p1.y)
-    p.endShape(p.CLOSE)
-    
-    // Surface Shape
-    p.beginShape()
-    p.noStroke()
 
     if (animate == true) {
 
-      p.fill(tRed, tGreen, tBlue)
-      // p.vertex(tSurface.p1.x, tSurface.p1.y)
-      // p.vertex(tSurface.p2.x, tSurface.p2.y)
-      // p.vertex(tSurface.p3.x, tSurface.p3.y)
-      // p.vertex(tSurface.p4.x, tSurface.p4.y)
-      // p.vertex(tSurface.p5.x, tSurface.p5.y)
-      // p.vertex(tSurface.p6.x, tSurface.p6.y)
-      // p.vertex(tSurface.p1.x, tSurface.p1.y)
-      p.vertex(surface.p1.x, surface.p1.y)
-      p.vertex(surface.p2.x, surface.p2.y)
-      p.vertex(surface.p3.x, surface.p3.y)
-      p.vertex(surface.p4.x, surface.p4.y)
-      p.vertex(surface.p5.x, surface.p5.y)
-      p.vertex(surface.p6.x, surface.p6.y)
-      p.vertex(surface.p1.x, surface.p1.y)
+      cRed = p.lerp(cRed, red, 0.05)
+      cGreen = p.lerp(cGreen, green, 0.05)
+      cBlue = p.lerp(cBlue, blue, 0.05)
 
+      cSurface = {
+        p1: {
+          x: p.lerp(cSurface.p1.x, surface.p1.x, friction),
+          y: p.lerp(cSurface.p1.y, surface.p1.y, friction),
+        },
+        p2: {
+          x: p.lerp(cSurface.p2.x, surface.p2.x, friction),
+          y: p.lerp(cSurface.p2.y, surface.p2.y, friction),
+        },
+        p3: {
+          x: p.lerp(cSurface.p3.x, surface.p3.x, friction),
+          y: p.lerp(cSurface.p3.y, surface.p3.y, friction),
+        },
+        p4: {
+          x: p.lerp(cSurface.p4.x, surface.p4.x, friction),
+          y: p.lerp(cSurface.p4.y, surface.p4.y, friction),
+        },
+        p5: {
+          x: p.lerp(cSurface.p5.x, surface.p5.x, friction),
+          y: p.lerp(cSurface.p5.y, surface.p5.y, friction),
+        },
+        p6: {
+          x: p.lerp(cSurface.p6.x, surface.p6.x, friction),
+          y: p.lerp(cSurface.p6.y, surface.p6.y, friction),
+        },
+        
+      };
+
+      p.beginShape()
+      p.noStroke()
+      p.fill(255)
+      p.vertex(base.p1.x, base.p1.y)
+      p.vertex(base.p2.x, base.p2.y)
+      p.vertex(base.p3.x, base.p3.y)
+      p.vertex(base.p4.x, base.p4.y)
+      p.vertex(cSurface.p4.x, cSurface.p4.y)
+      p.vertex(cSurface.p3.x, cSurface.p3.y)
+      p.vertex(cSurface.p2.x, cSurface.p2.y)
+      p.vertex(cSurface.p1.x, cSurface.p1.y)
+      p.endShape(p.CLOSE)
+      
+
+      
+      p.beginShape()
+      p.noStroke()
+      p.fill(cRed, cGreen, cBlue)
+      p.vertex(cSurface.p1.x, cSurface.p1.y)
+      p.vertex(cSurface.p2.x, cSurface.p2.y)
+      p.vertex(cSurface.p3.x, cSurface.p3.y)
+      p.vertex(cSurface.p4.x, cSurface.p4.y)
+      p.vertex(cSurface.p5.x, cSurface.p5.y)
+      p.vertex(cSurface.p6.x, cSurface.p6.y)
+      p.vertex(cSurface.p1.x, cSurface.p1.y)
       p.endShape(p.CLOSE)
 
       p.stroke(0)
       p.strokeWeight(1)
       // p.line(base.p2.x, base.p2.y, tSurface.p2.x, tSurface.p2.y)
       // p.line(base.p3.x, base.p3.y, tSurface.p3.x, tSurface.p3.y)
-      p.line(base.p2.x, base.p2.y, surface.p2.x, surface.p2.y)
-      p.line(base.p3.x, base.p3.y, surface.p3.x, surface.p3.y)
+      p.line(base.p2.x, base.p2.y, cSurface.p2.x, cSurface.p2.y)
+      p.line(base.p3.x, base.p3.y, cSurface.p3.x, cSurface.p3.y)
 
 
     } else {
 
+      
+
+      p.beginShape()
+      p.noStroke()
+      p.fill(255)
+      p.vertex(base.p1.x, base.p1.y)
+      p.vertex(base.p2.x, base.p2.y)
+      p.vertex(base.p3.x, base.p3.y)
+      p.vertex(base.p4.x, base.p4.y)
+      p.vertex(surface.p4.x, surface.p4.y)
+      p.vertex(surface.p3.x, surface.p3.y)
+      p.vertex(surface.p2.x, surface.p2.y)
+      p.vertex(surface.p1.x, surface.p1.y)
+      p.endShape(p.CLOSE)
+      
+
+       // Surface Shape
+      p.beginShape()
+      p.noStroke()
       p.fill(red, green, blue)
       p.vertex(surface.p1.x, surface.p1.y)
       p.vertex(surface.p2.x, surface.p2.y)
